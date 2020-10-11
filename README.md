@@ -37,6 +37,11 @@ The trends in technology have been increasing very fast and providing keen ideas
 The above block diagram shows schematic representation of  the systems.Here the sensor data is collected from voltage sensors and current sensors ,from high voltage transmission lines and the location (longitude,latitude values) is  collected using GPS Module.All these sensor data from sensors is collected to the PIC16F877A microcontroller. The power to the microcontroller is supplied by stepping down the high 220vAC to 5v DC using an SMPS(Switch Power Mode Supply) Module. Then this sensor data is sent to a Machine learning Deployed Server using a GSM(Global System for Mobile Communications) module through a GPRS(General Packet Radio Service) Network. After this the user needs to register in the respective website and log into it and check his details.The machine learning model will analyze the sensor data and detect,classify and locate the fault in the power lines and alert the user in the Department. Users can inform the worker about the type and location of fault and make the fault repair. 
 Hardware Integration and Deployment                  
 Schematic Design of Hardware             
+
+
+<p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
  
 	 	 	 	
                                                         PIC16F877A Microcontroller
@@ -45,6 +50,10 @@ Schematic Design of Hardware
 
                       To measure 220V AC, you need to step down this voltage. Because microcontrollers can't measure voltage greater than 5V. If you give voltage more than 5V to the analog input of the microcontroller, it will get damaged permanently. To assure protection of microcontrollers, you will need to step down 220 volt AC into AC  voltage whose peak value should be less than 5V. For example , 220V AV means RMS voltage and its peak value is equal to 311 volt. similarly you have to step down high AC voltage in such a way that its peak value should not be greater than 5 volt.
                       Potential Transformer can also be used to step down 220 Alteration voltage.But why do you want to spend more money? when you can do this with the help of cheap operational amplifiers and few resistors. Difference amplifier methods are more economical than potential transformers when you want to step down voltage less than 400 volt AC.
+		      
+		      <p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
                                                         Difference Amplifier circuit
               Difference amplifier is used to amplify voltage from two voltage levels.In case of Alternating voltage we have two voltage levels one is positive with respect to neutral and other is negative with respect to neutral.You can adjust the gain of difference amplifier according to our requirement by selecting proper  values of resistors.In this project gain is equal to :
              Gain=  R8/(R1+ R2+ R3)  ;
@@ -62,6 +71,10 @@ Capacitors C1, C2, and C3 are used to filter harmonics from input voltage and to
  
 mean primary current of the transformer is 100 Amp and the secondary current is 10 Amp. you can not use this current transformer to measure more than 100 Amp.
 By measuring the secondary side low current, we can easily convert it into primary current value by using the current ratio formula. I will discuss in the latter part of this discussion how to use this step-down ratio in the programming part.
+
+<p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
  
 # How to convert current into voltage?
 We cannot measure current directly. Firstly, we convert the secondary side current into voltage. We can use a known value of resistor load. We measure the voltage across this known resistor. After that, we can convert this measured voltage into the current. We can use ohm’s law formula to convert the voltage into the current.
@@ -141,6 +154,11 @@ Receive one character bit at a time and check whether it is started from $ or no
 If $ Receive then it is a string, we need to check GPGGA, this 5 letters and the comma.
 If it is GPGGA, then we will skip the time, and look for the Latitude and Longitude, We will store the Latitude and Longitude in two character arrays until N (North) and E (East) are not received.
 
+
+<p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
+
 Using a SIM900A(GSM) Module to send Sensor data to a Website
  
 In our scenario,we want to be able to monitor the current and the voltage values   and to see the data on our web page. If at all there isn't a Wi-Fi signal, this is where the SIM900A GSM module comes in handy. The SIM900A GSM module is able to send SMS messages and connect to the internet and send data. In our case, it's sending current and voltage data.
@@ -150,6 +168,10 @@ Everything is done with ASCII commands that begin with "AT."To send commands to 
 The AT+HTTPINIT command initializes the HTTP service. This command should be sent first before starting the HTTP service.
 The AT+HTTPPARA command sets up HTTP parameters for the HTTP call.
 
+
+<p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
  
  
 Website Development and Implementation                      
@@ -165,6 +187,11 @@ Login System working
  
 The basic requirement needed to build this system is MongoDB database, Nodejs, Bootstrap. First we need to create a basic login form using login.html file. 
 Html is used for the basic web page login and register page. Bootstrap is a frontend framework which we used for web page designing. This is used for the easier and faster creation of web pages.  In this system, the password is encrypted. This password is secured with the passport software. Look of the webpage gets more attractive using features in the frontend framework. For backend framework, node.js is used in this system. Node.js allows the creation of Web servers and networking tools using JavaScript and a collection of "modules" that handle various core functionalities. Node.js is an open source and executes javascript in webbrowser. When a user is logged into the webpage, his details are tested with the database from the Electrical department. For this,MongoDB is used . MongoDB is a document-oriented NoSQL database used for high volume data storage. MongoDB makes use of collections and documents. From these collection sets, details of the user are verified and allowed to webpage with his own credentials.
+
+
+<p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
 
 Machine Learning And Deployment :-                     
 We have used ANN(Artificial neural networks) as our Machine learning Algorithm which gave us pretty good results and to write the algorithm we have used tensorflow. We have made our own dataset with which we acquired 94.5% accuracy.
@@ -191,12 +218,18 @@ TensorFlow. is a free and open-source software library for dataflow and differen
 
 We have used ANN and tensorflow to classify the type of the fault from the received data from the GSM module.
 
+<p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
+
 
      Fig:  Training Accuracy : 94.2% 
         Epochs : 18
 We have created our own dataset with two features and two classes . Due to the lack of the dataset we have done this.
 
-
+<p align="center">
+    <img src="https://www.thinkright.me/wp-content/uploads/2018/11/28.png" alt="OCR" width="200"  height="165">
+</p>
              
 			Deployment
 	In this section we present the concept of deployment of the model. The machine learning model trained using tensorflow is a python object and will be converted to JSON object which can be later used to deploy in the server. The converted JSON model consists of details regarding the layers of the neural network and its corresponding weights. These details will be used for making predictions on the server. We need to import the tensorflow js module for node js and load the layers and corresponding weights from the json object using tensorflow.js functions. Later we can able to make predictions using apis.  
